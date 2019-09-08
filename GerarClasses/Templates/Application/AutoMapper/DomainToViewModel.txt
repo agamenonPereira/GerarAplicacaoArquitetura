@@ -1,0 +1,16 @@
+﻿using AutoMapper;
+using {{Sistema}}.Application.ViewModels;
+using {{Sistema}}.Domain.Models;
+
+namespace {{Sistema}}.Application.AutoMapper
+{
+    public class DomainToViewModelMappingProfile : Profile
+    {
+        public DomainToViewModelMappingProfile()
+        {
+            // MAP - {{Classe}}
+            CreateMap<{{Classe}}, {{Classe}}ViewModel>();
+        }
+
+    }
+}

@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Text;
+
+namespace {{Sistema}}.Infra.CrossCutting.Identity.Extensions
+{
+    public static class ClaimsExtensions
+    {
+        private static string ObterNomeDoUsuario(this ClaimsIdentity identity)
+        {
+
+            return identity.Claims?.FirstOrDefault(c => c.Type == "Nome")?.Value;
+        }
+
+        public static string ObterNomeDoUsuario(this IIdentity identity)
+        {
+            var claimsIdentity = identity as ClaimsIdentity;
+            return claimsIdentity != null ? ObterNomeDoUsuario(claimsIdentity) : string.Empty;
+        }
+
+
+        private static string ObterSobrenomeDoUsuario(this ClaimsIdentity identity)
+        {
+
+            return identity.Claims?.FirstOrDefault(c => c.Type == "Sobrenome")?.Value;
+        }
+
+        public static string ObterSobrenomeDoUsuario(this IIdentity identity)
+        {
+            var claimsIdentity = identity as ClaimsIdentity;
+            return claimsIdentity != null ? ObterSobrenomeDoUsuario(claimsIdentity) : string.Empty;
+        }
+
+
+    }
+}

@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using {{Sistema}}.Application.ViewModels;
+
+namespace {{Sistema}}.Application.IServices
+{
+    public interface I{{Classe}}AppService : IDisposable
+    {
+        void Incluir{{Classe}}({{Classe}}ViewModel {{ClasseLow}}ViewModel);
+
+        void Alterar{{Classe}}({{Classe}}ViewModel {{ClasseLow}}ViewModel);
+
+        void Excluir{{Classe}}({{Classe}}ViewModel {{ClasseLow}}ViewModel);
+
+        //void Excluir{{Classe}}({{TipoId}} {{NomeId}});
+
+        IEnumerable<{{Classe}}ViewModel> {{NomeDoMetodoObterTodos}}{{Classe}}();
+
+        {{Classe}}ViewModel Obter{{Classe}}PorId({{TipoId}} {{NomeId}});
+
+    }
+}

@@ -1,0 +1,14 @@
+﻿using {{Sistema}}.Domain.Commands;
+using FluentValidation;
+using FluentValidation.Validators;
+using System;
+
+namespace {{Sistema}}.Domain.Validations
+{
+    public abstract class {{Classe}}Validation<T> : AbstractValidator<T> where T : {{Classe}}Command
+    {
+
+        {{Validacoes}}
+
+    }
+}

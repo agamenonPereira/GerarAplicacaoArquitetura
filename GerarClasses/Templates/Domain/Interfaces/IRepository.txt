@@ -1,0 +1,17 @@
+﻿using System;
+
+namespace {{Sistema}}.Domain.Interfaces.Repository
+{
+    public interface IRepository<TEntity> : IDisposable where TEntity : class
+    {
+        TEntity Incluir(TEntity obj);
+
+        TEntity Alterar(TEntity obj);
+
+        int Excluir(Guid id);
+
+        int Excluir(int id);
+
+        int SalvarAlteracoes();
+    }
+}

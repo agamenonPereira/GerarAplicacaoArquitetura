@@ -1,0 +1,11 @@
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace {{Sistema}}.Infra.CrossCutting.Identity.Models
+{
+    public class ApplicationUser : IdentityUser
+    {
+        public string Nome { get; set; }
+        public string Sobrenome { get; set; }
+
+    }
+}

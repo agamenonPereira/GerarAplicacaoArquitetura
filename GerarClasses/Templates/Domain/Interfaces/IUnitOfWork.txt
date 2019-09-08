@@ -1,0 +1,10 @@
+﻿using {{Sistema}}.Domain.Core.Commands;
+using System;
+
+namespace {{Sistema}}.Domain.Interfaces.Repository
+{
+    public interface IUnitOfWork : IDisposable
+    {
+        CommandResponse Commit();
+    }
+}

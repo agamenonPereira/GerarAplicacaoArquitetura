@@ -1,0 +1,14 @@
+﻿using {{Sistema}}.Domain.Models;
+using System;
+using System.Linq;
+
+namespace {{Sistema}}.Domain.Interfaces.Repository
+{
+    public interface I{{Classe}}Repository : IRepository<{{Classe}}>
+    {
+        {{Classe}} Obter{{Classe}}PorId({{PrimeiroAtributoComTipo}});
+
+        IQueryable<{{Classe}}> {{NomeDoMetodoObterTodos}}{{Classe}}();
+
+    }
+}

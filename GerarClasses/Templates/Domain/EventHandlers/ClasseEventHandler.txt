@@ -1,0 +1,32 @@
+﻿using {{Sistema}}.Domain.Events;
+using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace {{Sistema}}.Domain.EventHandlers
+{
+    public class {{Classe}}EventHandler :
+        INotificationHandler<{{ClasseSufixo1}}Event>,
+        INotificationHandler<{{ClasseSufixo2}}Event>,
+        INotificationHandler<{{ClasseSufixo3}}Event>
+    {
+        public Task Handle({{ClasseSufixo1}}Event notification, CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
+
+
+        public Task Handle({{ClasseSufixo2}}Event notification, CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
+
+
+        public Task Handle({{ClasseSufixo3}}Event notification, CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
+
+    }
+}
+

@@ -1,0 +1,32 @@
+﻿using {{Sistema}}.Domain.Interfaces.Repository;
+using {{Sistema}}.Infra.Data.Context;
+using {{Sistema}}.Domain.Core.Commands;
+
+namespace {{Sistema}}.Infra.Data.UoW
+{
+    public class UnitOfWork : IUnitOfWork
+    {
+        private readonly {{Sistema}}Context _context;
+
+        public UnitOfWork({{Sistema}}Context context)
+        {
+            _context = context;
+        }
+
+
+        public CommandResponse Commit()
+        {
+            var res = _context.SaveChanges() > 0;
+			if (res)
+			   return CommandResponse.Ok;
+			return CommandResponse.Fail;
+        }
+
+
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
+
+    }
+}

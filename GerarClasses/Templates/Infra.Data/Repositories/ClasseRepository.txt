@@ -1,0 +1,27 @@
+﻿using System.Linq;
+using System;
+using {{Sistema}}.Domain.Interfaces.Repository;
+using {{Sistema}}.Domain.Models;
+using {{Sistema}}.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
+
+namespace {{Sistema}}.Infra.Data.Repositories
+{
+    public class {{Classe}}Repository : Repository<{{Classe}}>, I{{Classe}}Repository
+    {
+        public {{Classe}}Repository({{Sistema}}Context context) : base(context)
+        {
+        }
+
+        public {{Classe}} Obter{{Classe}}PorId({{PrimeiroAtributoComTipo}})
+        {
+            return DbSet.AsNoTracking().FirstOrDefault(c => c.{{PrimeiroAtributo}} == {{PrimeiroAtributoLowerCase}});
+        }
+
+        public IQueryable<{{Classe}}> {{NomeDoMetodoObterTodos}}{{Classe}}()
+        {
+            return DbSet.AsNoTracking();
+        }
+
+    }
+}

@@ -1,0 +1,15 @@
+﻿using System.Text.Encodings.Web;
+using System.Threading.Tasks;
+using {{Sistema}}.Infra.CrossCutting.Identity.Services;
+
+namespace {{Sistema}}.Infra.CrossCutting.Identity.Extensions
+{
+    public static class EmailSenderExtensions
+    {
+        public static Task SendEmailConfirmationAsync(this IEmailSender emailSender, string email, string link)
+        {
+            return emailSender.SendEmailAsync(email, "Confirme seu E-Mail",
+                $"Por favor, confirme sua conta de e-mail clicando neste link: <a href='{HtmlEncoder.Default.Encode(link)}'>link</a>");
+        }
+    }
+}

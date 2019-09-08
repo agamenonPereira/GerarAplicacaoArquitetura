@@ -1,0 +1,17 @@
+﻿using {{Sistema}}.Domain.Validations;
+using System;
+
+namespace {{Sistema}}.Domain.Commands
+{
+    public class {{PrefixoClasse}}Command : {{Classe}}Command
+    {
+	    {{ConstrutorDaClasseComPrefixo}}
+
+        public override bool IsValid()
+        {
+            ValidationResult = new {{PrefixoClasse}}CommandValidation().Validate(this);
+            return ValidationResult.IsValid;
+        }
+
+    }
+}

@@ -1,0 +1,15 @@
+﻿using {{Sistema}}.Domain.Core.Events;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace {{Sistema}}.Domain.Events
+{
+    public class {{ClasseSufixo}}Event : Event
+    {
+        {{Atributos}}
+
+        {{ConstrutorDaClasseComSufixo}}
+
+    }
+}

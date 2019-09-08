@@ -1,0 +1,12 @@
+﻿using System.Threading.Tasks;
+using {{Sistema}}.Domain.Core.Commands;
+using {{Sistema}}.Domain.Core.Events;
+
+namespace {{Sistema}}.Domain.Core.Bus
+{
+    public interface IMediatorHandler
+    {
+        Task<HandlerResult> SendCommand<T>(T command) where T : Command;
+        Task<bool> RaiseEvent<T>(T @event) where T : Event;
+    }
+}

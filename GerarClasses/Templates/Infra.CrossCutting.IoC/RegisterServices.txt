@@ -1,0 +1,93 @@
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using {{Sistema}}.Domain.Core.Bus;
+using {{Sistema}}.Infra.CrossCutting.Bus;
+using {{Sistema}}.Infra.CrossCutting.Identity.Authorization;
+using {{Sistema}}.Application.IServices;
+using {{Sistema}}.Application.Services;
+using {{Sistema}}.Domain.CommandHandlers;
+using {{Sistema}}.Domain.Commands;
+using {{Sistema}}.Domain.Core.Events;
+using {{Sistema}}.Domain.Core.Notifications;
+using {{Sistema}}.Domain.EventHandlers;
+using {{Sistema}}.Domain.Events;
+using {{Sistema}}.Domain.Interfaces.Repository;
+using {{Sistema}}.Infra.CrossCutting.Identity.Data;
+using {{Sistema}}.Infra.CrossCutting.Identity.Models;
+using {{Sistema}}.Infra.CrossCutting.Identity.Services;
+using {{Sistema}}.Infra.Data.Context;
+using {{Sistema}}.Infra.Data.EventSourcing;
+using {{Sistema}}.Infra.Data.Repositories;
+using {{Sistema}}.Infra.Data.Repositories.EventSourcing;
+using {{Sistema}}.Infra.Data.UoW;
+using {{Sistema}}.Domain.Interfaces;
+
+namespace {{Sistema}}Infra.CrossCutting.IoC
+{
+    public class RegisterServices
+    {
+        public static void Registrar(IServiceCollection services)
+        {
+            // ASP.NET HttpContext dependency
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // Domain Bus (Mediator)
+            services.AddScoped<IMediatorHandler, InMemoryBus>();
+
+            // ASP.NET Authorization Polices
+            services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
+
+            // Application 
+            services.AddScoped<I{{Classe}}AppService, {{Classe}}AppService>();
+
+            // ----------------------------------------------------------------------------------
+            // Domain - Events
+            // ----------------------------------------------------------------------------------
+            // DOMAIN NOTIFICATIONS;
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+
+            // {{ClasseUpper}};
+            services.AddScoped<INotificationHandler<{{ClasseSufixo1}}Event>, {{Classe}}EventHandler>();
+            services.AddScoped<INotificationHandler<{{ClasseSufixo2}}Event>, {{Classe}}EventHandler>();
+            services.AddScoped<INotificationHandler<{{ClasseSufixo3}}Event>, {{Classe}}EventHandler>();
+
+
+            // ----------------------------------------------------------------------------------
+            // Domain - Commands
+            // ----------------------------------------------------------------------------------
+            // {{ClasseUpper}};
+            services.AddScoped<IRequestHandler<{{Prefixo1Classe}}Command, HandlerResult>, {{Classe}}CommandHandler>();
+            services.AddScoped<IRequestHandler<{{Prefixo2Classe}}Command, HandlerResult>, {{Classe}}CommandHandler>();
+            services.AddScoped<IRequestHandler<{{Prefixo3Classe}}Command, HandlerResult>, {{Classe}}CommandHandler>();
+
+            // ----------------------------------------------------------------------------------
+            // Infra - Data
+            // ----------------------------------------------------------------------------------
+            services.AddScoped<I{{Classe}}Repository, {{Classe}}Repository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddDbContext<{{Sistema}}Context>();
+            services.AddDbContext<ApplicationDbContext>();
+
+            // ----------------------------------------------------------------------------------
+            // Infra - Data EventSourcing
+            // ----------------------------------------------------------------------------------
+            services.AddScoped<IEventStoreRepository, EventStoreSQLRepository>();
+            services.AddScoped<IEventStore, SqlEventStore>();
+            services.AddDbContext<EventStoreSQLContext>();
+
+            // ----------------------------------------------------------------------------------
+            // Infra - Identity Services
+            // ----------------------------------------------------------------------------------
+            services.AddTransient<IEmailSender, AuthEmailMessageSender>();
+            services.AddTransient<ISmsSender, AuthSMSMessageSender>();
+
+            // ----------------------------------------------------------------------------------
+            // Infra - Identity
+            // ----------------------------------------------------------------------------------
+            services.AddScoped<IUser, AspNetUser>();
+
+        }
+    }
+}

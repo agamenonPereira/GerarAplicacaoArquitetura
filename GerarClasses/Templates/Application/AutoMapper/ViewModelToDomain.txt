@@ -1,0 +1,24 @@
+﻿using AutoMapper;
+using System;
+using {{Sistema}}.Application.ViewModels;
+using {{Sistema}}.Domain.Commands;
+
+namespace {{Sistema}}.Application.AutoMapper
+{
+    public class ViewModelToDomainMappingProfile : Profile
+    {
+        public ViewModelToDomainMappingProfile()
+        {
+            // MAP - {{Classe}}
+            CreateMap<{{Classe}}ViewModel, {{Prefixo1Classe}}Command>()
+                .ConstructUsing(c => new {{Prefixo1Classe}}Command({{ConstrutorDaClasseComPrefixo}}));
+            
+			CreateMap<{{Classe}}ViewModel, {{Prefixo2Classe}}Command>()
+                .ConstructUsing(c => new {{Prefixo2Classe}}Command({{ConstrutorDaClasseComPrefixo}}));
+            
+			CreateMap<{{Classe}}ViewModel, {{Prefixo3Classe}}Command>()
+                .ConstructUsing(c => new {{Prefixo3Classe}}Command({{ConstrutorDaClasseComPrefixo}}));
+        }
+
+    }
+}

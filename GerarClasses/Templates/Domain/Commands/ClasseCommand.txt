@@ -1,0 +1,10 @@
+﻿using System;
+using {{Sistema}}.Domain.Core.Commands;
+
+namespace {{Sistema}}.Domain.Commands
+{
+    public abstract class {{Classe}}Command : Command
+    {
+        {{Atributos}}
+    }
+}

@@ -1,0 +1,13 @@
+﻿using {{Sistema}}.Domain.Commands;
+
+namespace {{Sistema}}.Domain.Validations
+{
+    public class {{PrefixoClasse}}{{Classe}}CommandValidation : {{Classe}}Validation<{{Classe}}Command>
+    {
+        public {{PrefixoClasse}}{{Classe}}CommandValidation()
+        {
+			{{MetodosValidacao}}
+        }
+
+    }
+}

@@ -1,0 +1,40 @@
+﻿using MediatR;
+using System.Threading.Tasks;
+using {{Sistema}}.Domain.Core.Bus;
+using {{Sistema}}.Domain.Core.Commands;
+using {{Sistema}}.Domain.Core.Events;
+
+namespace {{Sistema}}.Infra.CrossCutting.Bus
+{
+    public sealed class InMemoryBus : IMediatorHandler
+    {
+        private readonly IMediator _mediator;
+        private readonly IEventStore _eventStore;
+
+        public InMemoryBus(IEventStore eventStore, IMediator mediator)
+        {
+            _eventStore = eventStore;
+            _mediator = mediator;
+        }
+
+
+        public Task<HandlerResult> SendCommand<T>(T command) where T : Command
+        {
+            return _mediator.Send(command);
+        }
+
+
+        public Task<bool> RaiseEvent<T>(T @event) where T : Event
+        {
+            bool result = true;
+            if (!@event.MessageType.Equals("DomainNotification"))
+                _eventStore?.Save(@event);
+            else
+                result = false;
+            _mediator.Publish(@event);
+
+            return new Task<bool>(() => result);
+        }
+
+    }
+}

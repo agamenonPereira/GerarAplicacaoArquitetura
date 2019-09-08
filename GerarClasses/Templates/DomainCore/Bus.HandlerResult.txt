@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace {{Sistema}}.Domain.Core.Bus
+{
+    public class HandlerResult
+    {
+        public bool ComSucesso { get; set; }
+        public bool RegistroExistente { get; set; }                
+        public HandlerResult()
+        {
+            ComSucesso = false;
+            RegistroExistente = false;         
+        }
+
+        public static HandlerResult Sucesso()
+        {
+            return new HandlerResult() { ComSucesso = true };
+        }
+        public static HandlerResult Falha()
+        {
+            return new HandlerResult() { ComSucesso = false };
+        }
+        public static HandlerResult Existente()
+        {
+            return new HandlerResult() { RegistroExistente = true };
+        }
+        public static HandlerResult Atualizado()
+        {
+            return new HandlerResult() { ComSucesso = true , RegistroExistente = true };
+        }
+    }
+}

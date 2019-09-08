@@ -1,0 +1,76 @@
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using System;
+using System.Collections.Generic;
+using {{Sistema}}.Application.IServices;
+using {{Sistema}}.Application.ViewModels;
+using {{Sistema}}.Domain.Commands;
+using {{Sistema}}.Domain.Core.Bus;
+using {{Sistema}}.Domain.Interfaces.Repository;
+
+namespace {{Sistema}}.Application.Services
+{
+    public class {{Classe}}AppService : I{{Classe}}AppService
+    {
+        private readonly IMapper _mapper;
+        private readonly I{{Classe}}Repository _{{ClasseLow}}Repository;
+        private readonly IMediatorHandler Bus;
+
+        public {{Classe}}AppService(
+            IMapper mapper,
+            I{{Classe}}Repository {{ClasseLow}}Repository,
+            IMediatorHandler bus)
+        {
+            _mapper = mapper;
+            _{{ClasseLow}}Repository = {{ClasseLow}}Repository;
+            Bus = bus;
+        }
+
+
+        public void Incluir{{Classe}}({{Classe}}ViewModel {{ClasseLow}}ViewModel)
+        {
+            var incluirCommand = _mapper.Map<Incluir{{Classe}}Command>({{ClasseLow}}ViewModel);
+            Bus.SendCommand(incluirCommand);
+        }
+
+
+        public void Alterar{{Classe}}({{Classe}}ViewModel {{ClasseLow}}ViewModel)
+        {
+            var alterarCommand = _mapper.Map<Alterar{{Classe}}Command>({{ClasseLow}}ViewModel);
+            Bus.SendCommand(alterarCommand);
+        }
+
+
+        public void Excluir{{Classe}}({{Classe}}ViewModel {{ClasseLow}}ViewModel)
+        {
+            var excluirCommand = _mapper.Map<Excluir{{Classe}}Command>({{ClasseLow}}ViewModel);
+            Bus.SendCommand(excluirCommand);
+        }
+
+
+        //public void Excluir{{Classe}}({{TipoId}} {{NomeId}})
+        //{
+        //    var excluirCommand = new Excluir{{Classe}}Command({{NomeId}});
+        //    Bus.SendCommand(excluirCommand);
+        //}
+
+
+        public IEnumerable<{{Classe}}ViewModel> {{NomeDoMetodoObterTodos}}{{Classe}}()
+        {
+            return _{{ClasseLow}}Repository.{{NomeDoMetodoObterTodos}}{{Classe}}().ProjectTo<{{Classe}}ViewModel>(_mapper.ConfigurationProvider);
+        }
+
+
+        public {{Classe}}ViewModel Obter{{Classe}}PorId({{TipoId}} {{NomeId}})
+        {
+            return _mapper.Map<{{Classe}}ViewModel>(_{{ClasseLow}}Repository.Obter{{Classe}}PorId({{NomeId}}));
+        }
+
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
+
+    }
+}

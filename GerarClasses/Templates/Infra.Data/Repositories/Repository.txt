@@ -1,0 +1,61 @@
+﻿using {{Sistema}}.Domain.Interfaces.Repository;
+using {{Sistema}}.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
+using System;
+
+namespace {{Sistema}}.Infra.Data.Repositories
+{
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    {
+        protected readonly {{Sistema}}Context Db;
+        protected readonly DbSet<TEntity> DbSet;
+
+        public Repository({{Sistema}}Context context)
+        {
+            Db = context;
+            DbSet = Db.Set<TEntity>();
+        }
+
+        public virtual TEntity Incluir(TEntity obj)
+        {
+            DbSet.Add(obj);
+            return obj;
+        }
+
+
+        public virtual TEntity Alterar(TEntity obj)
+        {
+            DbSet.Update(obj);
+            return obj;
+        }
+
+
+        public int Excluir(Guid id)
+        {
+            DbSet.Remove(DbSet.Find(id));
+            return 1;
+        }
+
+
+        public int Excluir(int id)
+        {
+            DbSet.Remove(DbSet.Find(id));
+            return 1;
+        }
+
+
+        public int SalvarAlteracoes()
+        {
+            return Db.SaveChanges();
+        }
+
+
+        public void Dispose()
+        {
+            Db.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+
+    }
+}

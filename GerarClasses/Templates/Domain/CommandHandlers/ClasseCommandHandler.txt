@@ -1,0 +1,107 @@
+﻿using {{Sistema}}.Domain.Commands;
+using {{Sistema}}.Domain.Core.Bus;
+using {{Sistema}}.Domain.Core.Notifications;
+using {{Sistema}}.Domain.Events;
+using {{Sistema}}.Domain.Interfaces.Repository;
+using {{Sistema}}.Domain.Models;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace {{Sistema}}.Domain.CommandHandlers
+{
+    public class {{Classe}}CommandHandler : CommandHandler,
+        IRequestHandler<{{Prefixo1Classe}}Command, HandlerResult>,
+        IRequestHandler<{{Prefixo2Classe}}Command, HandlerResult>,
+        IRequestHandler<{{Prefixo3Classe}}Command, HandlerResult>
+    {
+        private readonly I{{Classe}}Repository _{{ClasseLower}}Repository;
+        private readonly IMediatorHandler Bus;
+
+        public {{Classe}}CommandHandler(
+            I{{Classe}}Repository {{ClasseLower}}Repository,
+            IUnitOfWork uow,
+            IMediatorHandler bus,
+            INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
+        {
+            _{{ClasseLower}}Repository = {{ClasseLower}}Repository;
+            Bus = bus;
+        }
+
+
+        public Task<HandlerResult> Handle({{Prefixo1Classe}}Command message, CancellationToken cancellationToken)
+        {
+            if (!message.IsValid())
+            {
+                NotifyValidationErrors(message);
+                return Task.FromResult(HandlerResult.Falha());
+            }
+            var {{ClasseLower}} = new {{Classe}}(
+				{{ListaDeAtributosParaConstrutorMessage}}
+			);
+
+            var obj = _{{ClasseLower}}Repository.{{Prefixo1}}({{ClasseLower}});
+
+            if (Commit())
+            {
+                Bus.RaiseEvent(new {{ClasseSufixo1}}Event(
+					{{ListaDeAtributosParaConstrutorObj}}
+				));
+                return Task.FromResult(HandlerResult.Sucesso());
+            }
+            return Task.FromResult(HandlerResult.Falha());
+        }
+
+
+        public Task<HandlerResult> Handle({{Prefixo2Classe}}Command message, CancellationToken cancellationToken)
+        {
+            if (!message.IsValid())
+            {
+                NotifyValidationErrors(message);
+                return Task.FromResult(HandlerResult.Falha());
+            }
+            var {{ClasseLower}} = new {{Classe}}({{ListaDeAtributosParaConstrutorMessage}});
+
+            var obj = _{{ClasseLower}}Repository.{{Prefixo2}}({{ClasseLower}});
+
+            if (Commit())
+            {
+                Bus.RaiseEvent(new {{ClasseSufixo2}}Event({{ListaDeAtributosParaConstrutorObj}}));
+                return Task.FromResult(HandlerResult.Sucesso());
+            }
+            return Task.FromResult(HandlerResult.Falha());
+        }
+
+
+        public Task<HandlerResult> Handle({{Prefixo3Classe}}Command message, CancellationToken cancellationToken)
+        {
+            if (!message.IsValid())
+            {
+                NotifyValidationErrors(message);
+                return Task.FromResult(HandlerResult.Falha());
+            }
+            var {{ClasseLower}} = new {{Classe}}({{ListaDeAtributosParaConstrutorMessage}});
+
+            var obj = _{{ClasseLower}}Repository.{{Prefixo3}}({{ClasseLower}}.Id);
+
+            if (Commit())
+            {
+                Bus.RaiseEvent(new {{ClasseSufixo3}}Event({{ListaDeAtributosParaConstrutorObj}}));
+                return Task.FromResult(HandlerResult.Sucesso());
+            }
+            return Task.FromResult(HandlerResult.Falha());
+        }
+
+
+        public void Dispose()
+        {
+            _{{ClasseLower}}Repository.Dispose();
+        }
+
+
+    }
+}
+
